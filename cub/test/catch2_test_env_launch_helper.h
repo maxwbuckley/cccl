@@ -149,6 +149,18 @@ struct stream_registry_factory_t
     // Get max grid dimension
     return cudaDeviceGetAttribute(&max_grid_dim_x, cudaDevAttrMaxGridDimX, device_ordinal);
   }
+
+  template <typename Kernel>
+  CUB_RUNTIME_FUNCTION cudaError_t max_dynamic_smem_size_for(int& max_dynamic_smem_size, Kernel kernel_ptr)
+  {
+    return cub::MaxPotentialDynamicSmemBytes(max_dynamic_smem_size, kernel_ptr);
+  }
+
+  template <typename Kernel>
+  CUB_RUNTIME_FUNCTION cudaError_t set_max_dynamic_smem_size_for(Kernel kernel_ptr, int smem_size)
+  {
+    return cudaFuncSetAttribute(kernel_ptr, cudaFuncAttributeMaxDynamicSharedMemorySize, smem_size);
+  }
 };
 
 struct stream_scope
