@@ -678,7 +678,7 @@ C2H_TEST_LIST("DeviceHistogram::HistogramEven bin computation does not overflow"
     nullptr,
     temp_storage_bytes,
     d_samples,
-    raw_pointer_cast(d_histo_out.data()),
+    cuda::std::to_address(d_histo_out.data()),
     num_bins + 1,
     lower_level,
     upper_level,
@@ -689,10 +689,10 @@ C2H_TEST_LIST("DeviceHistogram::HistogramEven bin computation does not overflow"
 
   auto temp_storage = c2h::device_vector<char>(temp_storage_bytes);
   const auto error2 = cub::DeviceHistogram::HistogramEven(
-    raw_pointer_cast(temp_storage.data()),
+    cuda::std::to_address(temp_storage.data()),
     temp_storage_bytes,
     d_samples,
-    raw_pointer_cast(d_histo_out.data()),
+    cuda::std::to_address(d_histo_out.data()),
     num_bins + 1,
     lower_level,
     upper_level,
@@ -737,7 +737,7 @@ C2H_TEST_LIST(
     nullptr,
     temp_storage_bytes,
     d_samples,
-    raw_pointer_cast(d_histo_out.data()),
+    cuda::std::to_address(d_histo_out.data()),
     num_levels,
     lower_level,
     upper_level,
@@ -757,7 +757,7 @@ C2H_TEST_LIST(
     nullptr,
     temp_storage_bytes,
     d_samples,
-    raw_pointer_cast(d_histo_out.data()),
+    cuda::std::to_address(d_histo_out.data()),
     valid_num_levels,
     lower_level,
     static_cast<level_t>(valid_num_bins), // upper_level must accommodate all bins

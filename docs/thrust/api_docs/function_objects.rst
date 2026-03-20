@@ -24,8 +24,8 @@ Consider this example:
     const int n = 10;
     thrust::device_vector<int> a(n, 1);
     thrust::device_vector<int> b(n);
-    int* a_ptr = thrust::raw_pointer_cast(a.data());
-    int* b_ptr = thrust::raw_pointer_cast(b.data());
+    int* a_ptr = cuda::std::to_address(a.data());
+    int* b_ptr = cuda::std::to_address(b.data());
     thrust::transform(thrust::device, a.begin(), a.end(), a.begin(),
         [a_ptr, b_ptr](const int& e) {
             const auto i = &e - a_ptr; // &e expected to point into global memory

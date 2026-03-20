@@ -224,7 +224,7 @@ _CCCL_HOST_DEVICE _CCCL_FORCEINLINE auto try_make_cache_modified_iterator(Iterat
   if constexpr (::cuda::std::contiguous_iterator<Iterator>)
   {
     return CacheModifiedInputIterator<LoadModifier, it_value_t<Iterator>, it_difference_t<Iterator>>{
-      THRUST_NS_QUALIFIER::raw_pointer_cast(&*it)};
+      cuda::std::to_address(&*it)};
   }
   else
   {

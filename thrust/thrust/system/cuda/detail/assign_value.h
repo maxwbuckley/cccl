@@ -57,14 +57,15 @@ _CCCL_HOST_DEVICE void assign_value(execution_policy<DerivedPolicy>& exec, Point
     {
       if constexpr (::cuda::std::is_same_v<V1, V2>)
       {
-        const cudaError status = trivial_copy_device_to_device(exec, raw_pointer_cast(dst), raw_pointer_cast(src), 1);
+        const cudaError status =
+          trivial_copy_device_to_device(exec, ::cuda::std::to_address(dst), ::cuda::std::to_address(src), 1);
         throw_on_error(status, "__copy:: D->D: failed");
       }
       else
       {
         const cudaError status =
           cuda_cub::detail::triple_chevron(1, 1, 0, stream(exec))
-            .doit(detail::assign_value_kernel<V1, V2>, raw_pointer_cast(dst), raw_pointer_cast(src));
+            .doit(detail::assign_value_kernel<V1, V2>, ::cuda::std::to_address(dst), ::cuda::std::to_address(src));
         throw_on_error(status, "__copy:: D->D with different data types: kernel failed");
         throw_on_error(synchronize_optional(exec), "__copy:: D->D with different data types: sync failed");
       }
@@ -86,7 +87,7 @@ struct cross_system_assign_host_path
   _CCCL_HOST void operator()(System1&, execution_policy<DerivedPolicy2>& system2, Pointer1 dst, Pointer2 src)
   {
     thrust::detail::it_value_t<Pointer2> copy_dst;
-    const cudaError status = trivial_copy_from_device(&copy_dst, raw_pointer_cast(src), 1, stream(system2));
+    const cudaError status = trivial_copy_from_device(&copy_dst, ::cuda::std::to_address(src), 1, stream(system2));
     *dst                   = copy_dst; // may convert type
     throw_on_error(status, "__copy:: D->H: failed");
   }
@@ -96,7 +97,7 @@ struct cross_system_assign_host_path
   _CCCL_HOST void operator()(execution_policy<DerivedPolicy1>& system1, System2&, Pointer1 dst, Pointer2 src)
   {
     thrust::detail::it_value_t<Pointer1> copy_src = *src; // may convert type
-    const cudaError status = trivial_copy_to_device(raw_pointer_cast(dst), &copy_src, 1, stream(system1));
+    const cudaError status = trivial_copy_to_device(cuda::std::to_address(dst), &copy_src, 1, stream(system1));
     throw_on_error(status, "__copy:: H->D: failed");
   }
 };

@@ -19,7 +19,8 @@ void TestReverseDevice(ExecutionPolicy exec)
 
   thrust::reverse(h_data.begin(), h_data.end());
 
-  reverse_kernel<<<1, 1>>>(exec, raw_pointer_cast(d_data.data()), raw_pointer_cast(d_data.data() + d_data.size()));
+  reverse_kernel<<<1, 1>>>(
+    exec, cuda::std::to_address(d_data.data()), cuda::std::to_address(d_data.data() + d_data.size()));
   cudaError_t const err = cudaDeviceSynchronize();
   ASSERT_EQUAL(cudaSuccess, err);
 

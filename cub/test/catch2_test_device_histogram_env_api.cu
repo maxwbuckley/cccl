@@ -30,8 +30,8 @@ C2H_TEST("cub::DeviceHistogram::HistogramEven accepts env with stream", "[histog
   auto env = cuda::std::execution::env{stream_ref};
 
   auto error = cub::DeviceHistogram::HistogramEven(
-    thrust::raw_pointer_cast(d_samples.data()),
-    thrust::raw_pointer_cast(d_histogram.data()),
+    cuda::std::to_address(d_samples.data()),
+    cuda::std::to_address(d_histogram.data()),
     num_levels,
     lower_level,
     upper_level,
@@ -69,8 +69,8 @@ C2H_TEST("cub::DeviceHistogram::HistogramEven accepts env with stream (2D)", "[h
   auto env = cuda::std::execution::env{stream_ref};
 
   auto error = cub::DeviceHistogram::HistogramEven(
-    thrust::raw_pointer_cast(d_samples.data()),
-    thrust::raw_pointer_cast(d_histogram.data()),
+    cuda::std::to_address(d_samples.data()),
+    cuda::std::to_address(d_histogram.data()),
     num_levels,
     lower_level,
     upper_level,
@@ -105,10 +105,10 @@ C2H_TEST("cub::DeviceHistogram::HistogramRange accepts env with stream", "[histo
   auto env = cuda::std::execution::env{stream_ref};
 
   auto error = cub::DeviceHistogram::HistogramRange(
-    thrust::raw_pointer_cast(d_samples.data()),
-    thrust::raw_pointer_cast(d_histogram.data()),
+    cuda::std::to_address(d_samples.data()),
+    cuda::std::to_address(d_histogram.data()),
     num_levels,
-    thrust::raw_pointer_cast(d_levels.data()),
+    cuda::std::to_address(d_levels.data()),
     num_samples,
     env);
   if (error != cudaSuccess)
@@ -142,10 +142,10 @@ C2H_TEST("cub::DeviceHistogram::HistogramRange accepts env with stream (2D)", "[
   auto env = cuda::std::execution::env{stream_ref};
 
   auto error = cub::DeviceHistogram::HistogramRange(
-    thrust::raw_pointer_cast(d_samples.data()),
-    thrust::raw_pointer_cast(d_histogram.data()),
+    cuda::std::to_address(d_samples.data()),
+    cuda::std::to_address(d_histogram.data()),
     num_levels,
-    thrust::raw_pointer_cast(d_levels.data()),
+    cuda::std::to_address(d_levels.data()),
     num_row_samples,
     num_rows,
     row_stride_bytes,
@@ -186,16 +186,16 @@ C2H_TEST("cub::DeviceHistogram::MultiHistogramEven accepts env with stream (1D)"
   auto d_histogram_b = thrust::device_vector<int>(4, 0);
 
   cuda::std::array<int*, NUM_ACTIVE_CHANNELS> d_histogram = {
-    thrust::raw_pointer_cast(d_histogram_r.data()),
-    thrust::raw_pointer_cast(d_histogram_g.data()),
-    thrust::raw_pointer_cast(d_histogram_b.data())};
+    cuda::std::to_address(d_histogram_r.data()),
+    cuda::std::to_address(d_histogram_g.data()),
+    cuda::std::to_address(d_histogram_b.data())};
 
   cuda::stream stream{cuda::devices[0]};
   cuda::stream_ref stream_ref{stream};
   auto env = cuda::std::execution::env{stream_ref};
 
   auto error = cub::DeviceHistogram::MultiHistogramEven<NUM_CHANNELS, NUM_ACTIVE_CHANNELS>(
-    thrust::raw_pointer_cast(d_samples.data()), d_histogram, num_levels, lower_level, upper_level, num_pixels, env);
+    cuda::std::to_address(d_samples.data()), d_histogram, num_levels, lower_level, upper_level, num_pixels, env);
   if (error != cudaSuccess)
   {
     std::cerr << "cub::DeviceHistogram::MultiHistogramEven failed with status: " << error << std::endl;
@@ -241,16 +241,16 @@ C2H_TEST("cub::DeviceHistogram::MultiHistogramEven accepts env with stream (2D)"
   auto d_histogram_b = thrust::device_vector<int>(4, 0);
 
   cuda::std::array<int*, NUM_ACTIVE_CHANNELS> d_histogram = {
-    thrust::raw_pointer_cast(d_histogram_r.data()),
-    thrust::raw_pointer_cast(d_histogram_g.data()),
-    thrust::raw_pointer_cast(d_histogram_b.data())};
+    cuda::std::to_address(d_histogram_r.data()),
+    cuda::std::to_address(d_histogram_g.data()),
+    cuda::std::to_address(d_histogram_b.data())};
 
   cuda::stream stream{cuda::devices[0]};
   cuda::stream_ref stream_ref{stream};
   auto env = cuda::std::execution::env{stream_ref};
 
   auto error = cub::DeviceHistogram::MultiHistogramEven<NUM_CHANNELS, NUM_ACTIVE_CHANNELS>(
-    thrust::raw_pointer_cast(d_samples.data()),
+    cuda::std::to_address(d_samples.data()),
     d_histogram,
     num_levels,
     lower_level,
@@ -297,25 +297,25 @@ C2H_TEST("cub::DeviceHistogram::MultiHistogramRange accepts env with stream (1D)
   cuda::std::array<int, NUM_ACTIVE_CHANNELS> num_levels = {3, 3, 4};
 
   cuda::std::array<const unsigned char*, NUM_ACTIVE_CHANNELS> d_levels = {
-    thrust::raw_pointer_cast(d_levels_r.data()),
-    thrust::raw_pointer_cast(d_levels_g.data()),
-    thrust::raw_pointer_cast(d_levels_b.data())};
+    cuda::std::to_address(d_levels_r.data()),
+    cuda::std::to_address(d_levels_g.data()),
+    cuda::std::to_address(d_levels_b.data())};
 
   auto d_histogram_r = thrust::device_vector<int>(2, 0);
   auto d_histogram_g = thrust::device_vector<int>(2, 0);
   auto d_histogram_b = thrust::device_vector<int>(3, 0);
 
   cuda::std::array<int*, NUM_ACTIVE_CHANNELS> d_histogram = {
-    thrust::raw_pointer_cast(d_histogram_r.data()),
-    thrust::raw_pointer_cast(d_histogram_g.data()),
-    thrust::raw_pointer_cast(d_histogram_b.data())};
+    cuda::std::to_address(d_histogram_r.data()),
+    cuda::std::to_address(d_histogram_g.data()),
+    cuda::std::to_address(d_histogram_b.data())};
 
   cuda::stream stream{cuda::devices[0]};
   cuda::stream_ref stream_ref{stream};
   auto env = cuda::std::execution::env{stream_ref};
 
   auto error = cub::DeviceHistogram::MultiHistogramRange<NUM_CHANNELS, NUM_ACTIVE_CHANNELS>(
-    thrust::raw_pointer_cast(d_samples.data()), d_histogram, num_levels, d_levels, num_pixels, env);
+    cuda::std::to_address(d_samples.data()), d_histogram, num_levels, d_levels, num_pixels, env);
   if (error != cudaSuccess)
   {
     std::cerr << "cub::DeviceHistogram::MultiHistogramRange failed with status: " << error << std::endl;
@@ -359,25 +359,25 @@ C2H_TEST("cub::DeviceHistogram::MultiHistogramRange accepts env with stream (2D)
   cuda::std::array<int, NUM_ACTIVE_CHANNELS> num_levels = {3, 3, 4};
 
   cuda::std::array<const unsigned char*, NUM_ACTIVE_CHANNELS> d_levels = {
-    thrust::raw_pointer_cast(d_levels_r.data()),
-    thrust::raw_pointer_cast(d_levels_g.data()),
-    thrust::raw_pointer_cast(d_levels_b.data())};
+    cuda::std::to_address(d_levels_r.data()),
+    cuda::std::to_address(d_levels_g.data()),
+    cuda::std::to_address(d_levels_b.data())};
 
   auto d_histogram_r = thrust::device_vector<int>(2, 0);
   auto d_histogram_g = thrust::device_vector<int>(2, 0);
   auto d_histogram_b = thrust::device_vector<int>(3, 0);
 
   cuda::std::array<int*, NUM_ACTIVE_CHANNELS> d_histogram = {
-    thrust::raw_pointer_cast(d_histogram_r.data()),
-    thrust::raw_pointer_cast(d_histogram_g.data()),
-    thrust::raw_pointer_cast(d_histogram_b.data())};
+    cuda::std::to_address(d_histogram_r.data()),
+    cuda::std::to_address(d_histogram_g.data()),
+    cuda::std::to_address(d_histogram_b.data())};
 
   cuda::stream stream{cuda::devices[0]};
   cuda::stream_ref stream_ref{stream};
   auto env = cuda::std::execution::env{stream_ref};
 
   auto error = cub::DeviceHistogram::MultiHistogramRange<NUM_CHANNELS, NUM_ACTIVE_CHANNELS>(
-    thrust::raw_pointer_cast(d_samples.data()),
+    cuda::std::to_address(d_samples.data()),
     d_histogram,
     num_levels,
     d_levels,

@@ -97,7 +97,7 @@ void gen(seed_t seed,
 {
   detail::gen_custom_type_state(
     seed,
-    reinterpret_cast<char*>(THRUST_NS_QUALIFIER::raw_pointer_cast(data.data())),
+    reinterpret_cast<char*>(cuda::std::to_address(data.data())),
     min,
     max,
     data.size(),
@@ -110,13 +110,13 @@ void gen(seed_t seed,
          T min = ::cuda::std::numeric_limits<T>::lowest(),
          T max = ::cuda::std::numeric_limits<T>::max())
 {
-  detail::gen_values_between(seed, {THRUST_NS_QUALIFIER::raw_pointer_cast(data.data()), data.size()}, min, max);
+  detail::gen_values_between(seed, {cuda::std::to_address(data.data()), data.size()}, min, max);
 }
 
 template <typename T>
 void gen(modulo_t mod, device_vector<T>& data)
 {
-  detail::gen_values_cyclic(mod, ::cuda::std::span<T>{THRUST_NS_QUALIFIER::raw_pointer_cast(data.data()), data.size()});
+  detail::gen_values_cyclic(mod, ::cuda::std::span<T>{cuda::std::to_address(data.data()), data.size()});
 }
 
 /**
@@ -132,7 +132,7 @@ device_vector<T> gen_uniform_offsets(seed_t seed, T total_elements, T min_segmen
   device_vector<T> segment_offsets(total_elements + 2);
   const auto new_size = detail::gen_uniform_offsets(
     seed,
-    {THRUST_NS_QUALIFIER::raw_pointer_cast(segment_offsets.data()), segment_offsets.size()},
+    {cuda::std::to_address(segment_offsets.data()), segment_offsets.size()},
     total_elements,
     min_segment_size,
     max_segment_size);
@@ -148,9 +148,8 @@ template <typename OffsetT, typename KeyT>
 void init_key_segments(const device_vector<OffsetT>& segment_offsets, device_vector<KeyT>& keys_out)
 {
   detail::init_key_segments(
-    ::cuda::std::span<const OffsetT>{
-      THRUST_NS_QUALIFIER::raw_pointer_cast(segment_offsets.data()), segment_offsets.size()},
-    THRUST_NS_QUALIFIER::raw_pointer_cast(keys_out.data()),
+    ::cuda::std::span<const OffsetT>{cuda::std::to_address(segment_offsets.data()), segment_offsets.size()},
+    cuda::std::to_address(keys_out.data()),
     sizeof(KeyT));
 }
 
@@ -158,9 +157,8 @@ template <typename OffsetT, template <typename> class... Ps>
 void init_key_segments(const device_vector<OffsetT>& segment_offsets, device_vector<custom_type_t<Ps...>>& keys_out)
 {
   detail::init_key_segments(
-    ::cuda::std::span<const OffsetT>{
-      THRUST_NS_QUALIFIER::raw_pointer_cast(segment_offsets.data()), segment_offsets.size()},
-    static_cast<custom_type_state_t*>(THRUST_NS_QUALIFIER::raw_pointer_cast(keys_out.data())),
+    ::cuda::std::span<const OffsetT>{cuda::std::to_address(segment_offsets.data()), segment_offsets.size()},
+    static_cast<custom_type_state_t*>(cuda::std::to_address(keys_out.data())),
     sizeof(custom_type_t<Ps...>));
 }
 } // namespace c2h

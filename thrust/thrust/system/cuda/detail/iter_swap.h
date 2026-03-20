@@ -37,7 +37,7 @@ template <typename Pointer1, typename Pointer2>
 CCCL_DETAIL_KERNEL_ATTRIBUTES void iter_swap_kernel(Pointer1 a, Pointer2 b)
 {
   using ::cuda::std::swap;
-  swap(*raw_pointer_cast(a), *raw_pointer_cast(b));
+  swap(*::cuda::std::to_address(a), *::cuda::std::to_address(b));
 }
 } // namespace detail
 

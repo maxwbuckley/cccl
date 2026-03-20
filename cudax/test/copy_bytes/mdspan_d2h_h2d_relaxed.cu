@@ -34,7 +34,7 @@ void test_impl_relaxed(
   {
     // host to device
     cuda::host_mdspan<const T, extents_t, cuda::layout_stride_relaxed> host_md(input.data(), src_mapping);
-    cuda::device_mdspan<T, extents_t> device_md(thrust::raw_pointer_cast(device_data.data()), dst_mapping);
+    cuda::device_mdspan<T, extents_t> device_md(cuda::std::to_address(device_data.data()), dst_mapping);
     cuda::experimental::copy_bytes(host_md, device_md, stream);
     stream.sync();
     CUDAX_REQUIRE(thrust::host_vector<T>(device_data) == expected);
@@ -44,7 +44,7 @@ void test_impl_relaxed(
     thrust::host_vector<T> host_output(expected.size(), 0);
     thrust::device_vector<T> device_input(input.begin(), input.end());
     cuda::device_mdspan<const T, extents_t, cuda::layout_stride_relaxed> device_md(
-      thrust::raw_pointer_cast(device_input.data()), src_mapping);
+      cuda::std::to_address(device_input.data()), src_mapping);
     cuda::host_mdspan<T, extents_t> host_md(host_output.data(), dst_mapping);
     cuda::experimental::copy_bytes(device_md, host_md, stream);
     stream.sync();
