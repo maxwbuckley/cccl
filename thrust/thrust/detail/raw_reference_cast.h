@@ -13,10 +13,11 @@
 #  pragma system_header
 #endif // no system header
 
-#include <thrust/detail/raw_pointer_cast.h>
 #include <thrust/detail/type_traits.h>
 #include <thrust/detail/type_traits/has_nested_type.h>
+#include <thrust/detail/type_traits/pointer_traits.h>
 
+#include <cuda/std/__memory/pointer_traits.h>
 #include <cuda/std/__tuple_dir/apply.h>
 #include <cuda/std/__type_traits/add_lvalue_reference.h>
 #include <cuda/std/__type_traits/enable_if.h>

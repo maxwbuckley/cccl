@@ -4,12 +4,12 @@
 #include <cub/device/device_copy.cuh>
 #include <cub/util_macro.cuh>
 
-#include <thrust/detail/raw_pointer_cast.h>
 #include <thrust/fill.h>
 #include <thrust/scan.h>
 #include <thrust/transform.h>
 
 #include <cuda/iterator>
+#include <cuda/std/memory>
 
 #include <cstdint>
 

@@ -5,13 +5,13 @@
 
 #include <cub/device/device_topk.cuh>
 
-#include <thrust/detail/raw_pointer_cast.h>
 #include <thrust/sort.h>
 
 #include <cuda/__execution/determinism.h>
 #include <cuda/__execution/output_ordering.h>
 #include <cuda/__execution/require.h>
 #include <cuda/iterator>
+#include <cuda/std/memory>
 #include <cuda/std/type_traits>
 
 #include "catch2_large_problem_helper.cuh"

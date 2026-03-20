@@ -3,10 +3,10 @@
 
 #include <cub/device/device_radix_sort.cuh>
 
-#include <thrust/detail/raw_pointer_cast.h>
 #include <thrust/device_vector.h>
 #include <thrust/host_vector.h>
 
+#include <cuda/std/memory>
 #include <cuda/std/tuple>
 
 #include <bitset>
@@ -26,7 +26,8 @@ struct custom_t
 struct decomposer_t
 {
   __host__ __device__ //
-    ::cuda::std::tuple<std::uint16_t&, float&> operator()(custom_t& key) const
+    ::cuda::std::tuple<std::uint16_t&, float&>
+    operator()(custom_t& key) const
   {
     return {key.i, key.f};
   }

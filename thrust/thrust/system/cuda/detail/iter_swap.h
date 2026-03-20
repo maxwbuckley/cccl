@@ -17,9 +17,9 @@
 
 #  include <thrust/system/cuda/config.h>
 
-#  include <thrust/detail/raw_pointer_cast.h>
 #  include <thrust/system/cuda/detail/execution_policy.h>
 
+#  include <cuda/std/__memory/pointer_traits.h>
 #  include <cuda/std/__utility/swap.h>
 
 #  include <nv/target>

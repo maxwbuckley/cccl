@@ -5,7 +5,7 @@
 
 #include <cub/device/dispatch/dispatch_segmented_radix_sort.cuh>
 
-#include <thrust/detail/raw_pointer_cast.h>
+#include <cuda/std/memory>
 
 #include "catch2_radix_sort_helper.cuh"
 #include <c2h/catch2_test_helper.h>

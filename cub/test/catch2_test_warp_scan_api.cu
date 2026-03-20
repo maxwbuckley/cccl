@@ -3,7 +3,6 @@
 
 #include <cub/warp/warp_scan.cuh>
 
-#include <thrust/detail/raw_pointer_cast.h>
 #include <thrust/device_vector.h>
 #include <thrust/host_vector.h>
 
@@ -11,6 +10,7 @@
 #include <cuda/std/__algorithm/max.h>
 #include <cuda/std/__numeric/inclusive_scan.h>
 #include <cuda/std/__numeric/iota.h>
+#include <cuda/std/memory>
 
 #include <c2h/catch2_test_helper.h>
 

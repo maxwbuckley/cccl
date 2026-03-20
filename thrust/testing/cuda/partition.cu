@@ -3,7 +3,7 @@
 #include <thrust/iterator/discard_iterator.h>
 #include <thrust/partition.h>
 
-#include "thrust/detail/raw_pointer_cast.h"
+#include "cuda/std/memory"
 #include <unittest/unittest.h>
 
 template <typename T>

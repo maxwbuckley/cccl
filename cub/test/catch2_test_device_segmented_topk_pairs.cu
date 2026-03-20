@@ -6,11 +6,11 @@
 #include <cub/device/dispatch/dispatch_batched_topk.cuh>
 
 #include <thrust/count.h>
-#include <thrust/detail/raw_pointer_cast.h>
 #include <thrust/scan.h>
 #include <thrust/scatter.h>
 
 #include <cuda/iterator>
+#include <cuda/std/memory>
 
 #include "catch2_test_device_topk_common.cuh"
 #include "catch2_test_launch_helper.h"

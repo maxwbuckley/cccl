@@ -8,12 +8,11 @@
 //
 //===----------------------------------------------------------------------===//
 
-#include <thrust/detail/raw_pointer_cast.h>
-
 #include <cuda/std/array>
 #include <cuda/std/cstddef>
 #include <cuda/std/functional>
 #include <cuda/std/limits>
+#include <cuda/std/memory>
 #include <cuda/std/span>
 
 #include <cuda/experimental/__cuco/hash_functions.cuh>

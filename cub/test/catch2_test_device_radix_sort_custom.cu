@@ -5,11 +5,12 @@
 
 #include <cub/device/device_radix_sort.cuh>
 
-#include <thrust/detail/raw_pointer_cast.h>
 #include <thrust/device_vector.h> // for examples
 #include <thrust/gather.h>
 #include <thrust/reverse.h>
 #include <thrust/sequence.h>
+
+#include <cuda/std/memory>
 
 #include <algorithm>
 #include <bitset>

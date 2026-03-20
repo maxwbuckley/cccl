@@ -6,10 +6,10 @@
 #include <cub/device/device_for.cuh>
 
 #include <thrust/count.h>
-#include <thrust/detail/raw_pointer_cast.h>
 #include <thrust/sequence.h>
 
 #include <cuda/iterator>
+#include <cuda/std/memory>
 
 #include "catch2_test_launch_helper.h"
 #include <c2h/catch2_test_helper.h>

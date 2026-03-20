@@ -15,7 +15,6 @@
 
 #include <thrust/system/cuda/config.h>
 
-#include <thrust/detail/raw_pointer_cast.h>
 #include <thrust/detail/temporary_array.h>
 #include <thrust/system/cuda/detail/cdp_dispatch.h>
 #include <thrust/system/cuda/detail/cross_system.h>
@@ -24,6 +23,8 @@
 #include <thrust/system/cuda/detail/uninitialized_copy.h>
 #include <thrust/system/cuda/detail/util.h>
 #include <thrust/type_traits/is_trivially_relocatable.h>
+
+#include <cuda/std/__memory/pointer_traits.h>
 
 #if _CCCL_CUDA_COMPILATION()
 #  include <cub/device/dispatch/tuning/tuning_transform.cuh>

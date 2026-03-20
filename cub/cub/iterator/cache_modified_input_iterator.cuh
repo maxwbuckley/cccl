@@ -22,10 +22,10 @@
 #include <cub/thread/thread_load.cuh>
 #include <cub/thread/thread_store.cuh>
 
-#include <thrust/detail/raw_pointer_cast.h>
 #include <thrust/iterator/iterator_facade.h>
 
 #include <cuda/std/__iterator/iterator_traits.h>
+#include <cuda/std/__memory/pointer_traits.h>
 #include <cuda/std/__type_traits/remove_cv.h>
 #include <cuda/std/__utility/declval.h>
 

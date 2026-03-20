@@ -5,7 +5,7 @@
 
 #include <cub/device/device_merge_sort.cuh>
 
-#include <thrust/detail/raw_pointer_cast.h>
+#include <cuda/std/memory>
 
 #include <algorithm>
 

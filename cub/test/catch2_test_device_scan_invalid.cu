@@ -5,12 +5,12 @@
 
 #include <cub/device/device_scan.cuh>
 
-#include <thrust/detail/raw_pointer_cast.h>
 #include <thrust/iterator/zip_iterator.h>
 
 #include <cuda/cmath>
 #include <cuda/iterator>
 #include <cuda/std/limits>
+#include <cuda/std/memory>
 
 #include <cstdint>
 

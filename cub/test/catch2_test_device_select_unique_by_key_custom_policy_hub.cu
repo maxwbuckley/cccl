@@ -5,9 +5,8 @@
 
 #include <cub/device/dispatch/dispatch_unique_by_key.cuh>
 
-#include <thrust/detail/raw_pointer_cast.h>
-
 #include <cuda/std/functional>
+#include <cuda/std/memory>
 
 #include <c2h/catch2_test_helper.h>
 

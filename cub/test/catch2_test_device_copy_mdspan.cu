@@ -4,7 +4,6 @@
 #include <cub/device/device_copy.cuh>
 
 #include <thrust/count.h>
-#include <thrust/detail/raw_pointer_cast.h>
 #include <thrust/device_vector.h>
 #include <thrust/fill.h>
 #include <thrust/host_vector.h>
@@ -12,6 +11,7 @@
 
 #include <cuda/std/array>
 #include <cuda/std/mdspan>
+#include <cuda/std/memory>
 
 #include <c2h/catch2_test_helper.h>
 #include <catch2_test_launch_helper.h>

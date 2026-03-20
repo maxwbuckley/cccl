@@ -16,8 +16,8 @@
 #include <thrust/detail/execute_with_allocator.h>
 #include <thrust/detail/execution_policy.h>
 #include <thrust/detail/pointer.h>
-#include <thrust/detail/raw_pointer_cast.h>
 
+#include <cuda/std/__memory/pointer_traits.h>
 #include <cuda/std/__utility/pair.h>
 
 // Include all active backend system implementations (generic, sequential, host and device)

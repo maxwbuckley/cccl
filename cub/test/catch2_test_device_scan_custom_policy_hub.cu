@@ -5,9 +5,8 @@
 
 #include <cub/device/device_scan.cuh>
 
-#include <thrust/detail/raw_pointer_cast.h>
-
 #include <cuda/std/functional>
+#include <cuda/std/memory>
 
 #include "catch2_test_device_scan.cuh"
 #include <c2h/catch2_test_helper.h>

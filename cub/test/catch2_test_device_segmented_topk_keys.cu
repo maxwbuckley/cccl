@@ -7,11 +7,11 @@
 #include <cub/util_type.cuh>
 
 #include <thrust/count.h>
-#include <thrust/detail/raw_pointer_cast.h>
 #include <thrust/scan.h>
 
 #include <cuda/iterator>
 #include <cuda/std/__algorithm/min.h>
+#include <cuda/std/memory>
 
 #include "catch2_test_device_topk_common.cuh"
 #include "catch2_test_launch_helper.h"

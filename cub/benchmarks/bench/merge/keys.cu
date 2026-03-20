@@ -3,8 +3,7 @@
 
 #include <cub/device/device_merge.cuh>
 
-#include <thrust/detail/raw_pointer_cast.h>
-
+#include <cuda/std/memory>
 #include <cuda/std/utility>
 
 #include <cstdint>

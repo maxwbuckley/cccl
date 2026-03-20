@@ -5,10 +5,10 @@
 
 #include <cub/device/device_find.cuh>
 
-#include <thrust/detail/raw_pointer_cast.h>
 #include <thrust/tabulate.h>
 
 #include <cuda/iterator>
+#include <cuda/std/memory>
 
 #include "catch2_test_device_reduce.cuh"
 #include "catch2_test_launch_helper.h"

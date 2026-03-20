@@ -5,9 +5,8 @@
 
 #include <cub/device/device_histogram.cuh>
 
-#include <thrust/detail/raw_pointer_cast.h>
-
 #include <cuda/std/array>
+#include <cuda/std/memory>
 #include <cuda/std/type_traits>
 
 #include <c2h/catch2_test_helper.h>

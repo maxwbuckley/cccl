@@ -12,9 +12,9 @@
 #elif defined(_CCCL_IMPLICIT_SYSTEM_HEADER_MSVC)
 #  pragma system_header
 #endif // no system header
-#include <thrust/detail/raw_pointer_cast.h>
 #include <thrust/system/detail/sequential/execution_policy.h>
 
+#include <cuda/std/__memory/pointer_traits.h>
 #include <cuda/std/cstdlib> // for malloc & free
 
 THRUST_NAMESPACE_BEGIN

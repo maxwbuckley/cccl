@@ -23,6 +23,8 @@
 #include <thrust/detail/temporary_buffer.h>
 #include <thrust/detail/type_traits/pointer_traits.h>
 
+#include <cuda/std/__memory/pointer_traits.h>
+
 THRUST_NAMESPACE_BEGIN
 
 /*! \addtogroup memory_management Memory Management

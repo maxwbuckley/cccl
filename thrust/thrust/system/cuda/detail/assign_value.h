@@ -15,10 +15,11 @@
 
 #if _CCCL_CUDA_COMPILATION()
 
-#  include <thrust/detail/raw_pointer_cast.h>
 #  include <thrust/system/cuda/detail/cross_system.h>
 #  include <thrust/system/cuda/detail/execution_policy.h>
 #  include <thrust/system/cuda/detail/util.h>
+
+#  include <cuda/std/__memory/pointer_traits.h>
 
 #  include <nv/target>
 
@@ -97,7 +98,7 @@ struct cross_system_assign_host_path
   _CCCL_HOST void operator()(execution_policy<DerivedPolicy1>& system1, System2&, Pointer1 dst, Pointer2 src)
   {
     thrust::detail::it_value_t<Pointer1> copy_src = *src; // may convert type
-    const cudaError status = trivial_copy_to_device(cuda::std::to_address(dst), &copy_src, 1, stream(system1));
+    const cudaError status = trivial_copy_to_device(::cuda::std::to_address(dst), &copy_src, 1, stream(system1));
     throw_on_error(status, "__copy:: H->D: failed");
   }
 };

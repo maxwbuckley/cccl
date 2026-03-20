@@ -11,7 +11,6 @@
 
 #  include <cub/device/device_for.cuh>
 
-#  include <thrust/detail/raw_pointer_cast.h>
 #  include <thrust/device_vector.h>
 #  include <thrust/equal.h>
 #  include <thrust/fill.h>
@@ -19,6 +18,7 @@
 
 #  include <cuda/std/array>
 #  include <cuda/std/mdspan>
+#  include <cuda/std/memory>
 #  include <cuda/std/span>
 
 #  include <cstdlib>

@@ -16,7 +16,7 @@
 #include "catch2_radix_sort_helper.cuh"
 #include "catch2_segmented_sort_helper.cuh"
 #include "catch2_test_launch_helper.h"
-#include "thrust/detail/raw_pointer_cast.h"
+#include "cuda/std/memory"
 #include <c2h/catch2_test_helper.h>
 
 // %PARAM% TEST_LAUNCH lid 0:1:2

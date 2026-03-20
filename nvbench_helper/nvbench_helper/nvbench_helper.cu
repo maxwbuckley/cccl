@@ -2,7 +2,6 @@
 
 #include <thrust/binary_search.h>
 #include <thrust/count.h>
-#include <thrust/detail/raw_pointer_cast.h>
 #include <thrust/distance.h>
 #include <thrust/execution_policy.h>
 #include <thrust/fill.h>
@@ -17,6 +16,7 @@
 
 #include <cuda/functional>
 #include <cuda/std/bit>
+#include <cuda/std/memory>
 
 #include <cstdint>
 #include <random>

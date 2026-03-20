@@ -8,7 +8,7 @@
 
 #include <nvbench_helper.cuh>
 
-#include "thrust/detail/raw_pointer_cast.h"
+#include "cuda/std/memory"
 
 template <typename T>
 static void sequence(nvbench::state& state, nvbench::type_list<T>)

@@ -5,12 +5,12 @@
 #include <cub/util_device.cuh>
 #include <cub/util_macro.cuh>
 
-#include <thrust/detail/raw_pointer_cast.h>
 #include <thrust/device_vector.h>
 
 #include <cuda/devices>
 #include <cuda/std/__algorithm/find_if.h>
 #include <cuda/std/array>
+#include <cuda/std/memory>
 
 #include "catch2_test_launch_helper.h"
 #include <c2h/catch2_test_helper.h>

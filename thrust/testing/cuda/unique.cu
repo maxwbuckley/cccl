@@ -1,7 +1,8 @@
-#include <thrust/detail/raw_pointer_cast.h>
 #include <thrust/execution_policy.h>
 #include <thrust/iterator/counting_iterator.h>
 #include <thrust/unique.h>
+
+#include <cuda/std/memory>
 
 #include <unittest/unittest.h>
 

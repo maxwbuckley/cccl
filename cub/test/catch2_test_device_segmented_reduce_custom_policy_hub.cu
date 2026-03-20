@@ -5,9 +5,8 @@
 
 #include <cub/device/dispatch/dispatch_segmented_reduce.cuh>
 
-#include <thrust/detail/raw_pointer_cast.h>
-
 #include <cuda/std/functional>
+#include <cuda/std/memory>
 
 #include "catch2_test_device_reduce.cuh"
 #include <c2h/catch2_test_helper.h>

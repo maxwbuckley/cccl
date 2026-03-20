@@ -6,7 +6,6 @@
 #include <cub/device/device_merge_sort.cuh>
 
 #include <thrust/copy.h>
-#include <thrust/detail/raw_pointer_cast.h>
 #include <thrust/equal.h>
 #include <thrust/iterator/zip_iterator.h>
 #include <thrust/random.h>
@@ -15,6 +14,7 @@
 
 #include <cuda/iterator>
 #include <cuda/std/iterator>
+#include <cuda/std/memory>
 
 #include <algorithm>
 

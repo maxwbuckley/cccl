@@ -5,7 +5,7 @@
 
 #include <cub/device/dispatch/dispatch_three_way_partition.cuh>
 
-#include <thrust/detail/raw_pointer_cast.h>
+#include <cuda/std/memory>
 
 #include <c2h/catch2_test_helper.h>
 

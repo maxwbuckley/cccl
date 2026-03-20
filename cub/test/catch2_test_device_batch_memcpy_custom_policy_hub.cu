@@ -5,10 +5,9 @@
 
 #include <cub/device/dispatch/dispatch_batch_memcpy.cuh>
 
-#include <thrust/detail/raw_pointer_cast.h>
-
 #include <cuda/std/array>
 #include <cuda/std/cstdint>
+#include <cuda/std/memory>
 
 #include <c2h/catch2_test_helper.h>
 

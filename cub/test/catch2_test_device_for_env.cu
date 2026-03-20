@@ -5,10 +5,10 @@
 
 #include <cub/device/device_for.cuh>
 
-#include <thrust/detail/raw_pointer_cast.h>
 #include <thrust/device_vector.h>
 
 #include <cuda/devices>
+#include <cuda/std/memory>
 #include <cuda/stream>
 
 #include <c2h/catch2_test_helper.h>

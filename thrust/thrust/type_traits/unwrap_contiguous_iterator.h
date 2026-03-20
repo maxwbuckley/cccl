@@ -5,9 +5,9 @@
 
 #include <thrust/detail/config.h>
 
-#include <thrust/detail/raw_pointer_cast.h>
 #include <thrust/type_traits/is_contiguous_iterator.h>
 
+#include <cuda/std/__memory/pointer_traits.h>
 #include <cuda/std/__utility/declval.h>
 
 THRUST_NAMESPACE_BEGIN

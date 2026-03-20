@@ -6,8 +6,9 @@
 #include <cub/device/device_for.cuh>
 
 #include <thrust/count.h>
-#include <thrust/detail/raw_pointer_cast.h>
 #include <thrust/device_vector.h>
+
+#include <cuda/std/memory>
 
 #include <c2h/catch2_test_helper.h>
 

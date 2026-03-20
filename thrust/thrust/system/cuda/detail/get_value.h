@@ -16,9 +16,10 @@
 #if _CCCL_CUDA_COMPILATION()
 #  include <thrust/system/cuda/config.h>
 
-#  include <thrust/detail/raw_pointer_cast.h>
 #  include <thrust/iterator/iterator_traits.h>
 #  include <thrust/system/cuda/detail/cross_system.h>
+
+#  include <cuda/std/__memory/pointer_traits.h>
 
 #  include <nv/target>
 

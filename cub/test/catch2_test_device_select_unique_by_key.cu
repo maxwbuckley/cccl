@@ -5,9 +5,8 @@
 
 #include <cub/device/device_select.cuh>
 
-#include <thrust/detail/raw_pointer_cast.h>
-
 #include <cuda/iterator>
+#include <cuda/std/memory>
 
 #include <algorithm>
 

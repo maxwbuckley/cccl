@@ -3,7 +3,7 @@
 
 #include <cub/block/radix_rank_sort_operations.cuh>
 
-#include <thrust/detail/raw_pointer_cast.h>
+#include <cuda/std/memory>
 
 #include <bitset>
 #include <climits>

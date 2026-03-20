@@ -5,11 +5,11 @@
 #include <cub/util_macro.cuh>
 
 #include <thrust/copy.h>
-#include <thrust/detail/raw_pointer_cast.h>
 #include <thrust/reduce.h>
 #include <thrust/transform.h>
 
 #include <cuda/iterator>
+#include <cuda/std/memory>
 
 #include "catch2_test_device_memcpy_batched_common.cuh"
 #include "catch2_test_launch_helper.h"

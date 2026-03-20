@@ -5,9 +5,8 @@
 
 #include <cub/device/device_adjacent_difference.cuh>
 
-#include <thrust/detail/raw_pointer_cast.h>
-
 #include <cuda/std/functional>
+#include <cuda/std/memory>
 #include <cuda/std/numeric>
 
 #include <c2h/catch2_test_helper.h>

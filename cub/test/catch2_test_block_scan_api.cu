@@ -3,10 +3,10 @@
 
 #include <cub/block/block_scan.cuh>
 
-#include <thrust/detail/raw_pointer_cast.h>
 #include <thrust/device_vector.h>
 #include <thrust/host_vector.h>
 
+#include <cuda/std/memory>
 #include <cuda/std/numeric>
 
 #include <c2h/catch2_test_helper.h>

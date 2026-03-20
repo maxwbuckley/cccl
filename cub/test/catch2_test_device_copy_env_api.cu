@@ -5,12 +5,12 @@
 
 #include <cub/device/device_copy.cuh>
 
-#include <thrust/detail/raw_pointer_cast.h>
 #include <thrust/device_vector.h>
 #include <thrust/sequence.h>
 
 #include <cuda/devices>
 #include <cuda/std/mdspan>
+#include <cuda/std/memory>
 #include <cuda/stream>
 
 #include <iostream>
