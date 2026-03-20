@@ -22,7 +22,9 @@
 #include <cub/util_debug.cuh>
 #include <cub/util_type.cuh>
 
+#include <cuda/__cmath/ceil_div.h>
 #include <cuda/__cmath/pow2.h>
+#include <cuda/std/__cstring/memcpy.h>
 
 CUB_NAMESPACE_BEGIN
 
@@ -213,25 +215,23 @@ _CCCL_DEVICE _CCCL_FORCEINLINE T ShuffleUp(T input, int src_offset, int first_th
   /// The 5-bit SHFL mask for logically splitting warps into sub-segments starts 8-bits up
   constexpr int SHFL_C = (32 - LOGICAL_WARP_THREADS) << 8;
 
-  using ShuffleWord = typename UnitWord<T>::ShuffleWord;
+  using ShuffleWord   = typename UnitWord<T>::ShuffleWord;
+  constexpr int WORDS = ::cuda::ceil_div(sizeof(T), sizeof(ShuffleWord));
 
-  constexpr int WORDS = (sizeof(T) + sizeof(ShuffleWord) - 1) / sizeof(ShuffleWord);
-
-  T output;
-  ShuffleWord* output_alias = reinterpret_cast<ShuffleWord*>(&output);
-  ShuffleWord* input_alias  = reinterpret_cast<ShuffleWord*>(&input);
+  ShuffleWord output_alias[WORDS];
+  ShuffleWord input_alias[WORDS];
+  ::cuda::std::memcpy(input_alias, &input, sizeof(T));
 
   unsigned int shuffle_word;
-  shuffle_word    = SHFL_UP_SYNC((unsigned int) input_alias[0], src_offset, first_thread | SHFL_C, member_mask);
-  output_alias[0] = shuffle_word;
-
   _CCCL_PRAGMA_UNROLL_FULL()
-  for (int WORD = 1; WORD < WORDS; ++WORD)
+  for (int WORD = 0; WORD < WORDS; ++WORD)
   {
     shuffle_word       = SHFL_UP_SYNC((unsigned int) input_alias[WORD], src_offset, first_thread | SHFL_C, member_mask);
     output_alias[WORD] = shuffle_word;
   }
 
+  T output;
+  ::cuda::std::memcpy(&output, output_alias, sizeof(T));
   return output;
 }
 
@@ -291,25 +291,23 @@ _CCCL_DEVICE _CCCL_FORCEINLINE T ShuffleDown(T input, int src_offset, int last_t
   /// The 5-bit SHFL mask for logically splitting warps into sub-segments starts 8-bits up
   static constexpr int SHFL_C = (32 - LOGICAL_WARP_THREADS) << 8;
 
-  using ShuffleWord = typename UnitWord<T>::ShuffleWord;
+  using ShuffleWord   = typename UnitWord<T>::ShuffleWord;
+  constexpr int WORDS = ::cuda::ceil_div(sizeof(T), sizeof(ShuffleWord));
 
-  constexpr int WORDS = (sizeof(T) + sizeof(ShuffleWord) - 1) / sizeof(ShuffleWord);
-
-  T output;
-  ShuffleWord* output_alias = reinterpret_cast<ShuffleWord*>(&output);
-  ShuffleWord* input_alias  = reinterpret_cast<ShuffleWord*>(&input);
+  ShuffleWord output_alias[WORDS];
+  ShuffleWord input_alias[WORDS];
+  ::cuda::std::memcpy(input_alias, &input, sizeof(T));
 
   unsigned int shuffle_word;
-  shuffle_word    = SHFL_DOWN_SYNC((unsigned int) input_alias[0], src_offset, last_thread | SHFL_C, member_mask);
-  output_alias[0] = shuffle_word;
-
   _CCCL_PRAGMA_UNROLL_FULL()
-  for (int WORD = 1; WORD < WORDS; ++WORD)
+  for (int WORD = 0; WORD < WORDS; ++WORD)
   {
     shuffle_word = SHFL_DOWN_SYNC((unsigned int) input_alias[WORD], src_offset, last_thread | SHFL_C, member_mask);
     output_alias[WORD] = shuffle_word;
   }
 
+  T output;
+  ::cuda::std::memcpy(&output, output_alias, sizeof(T));
   return output;
 }
 
@@ -365,24 +363,23 @@ _CCCL_DEVICE _CCCL_FORCEINLINE T ShuffleDown(T input, int src_offset, int last_t
 template <int LOGICAL_WARP_THREADS, typename T>
 _CCCL_DEVICE _CCCL_FORCEINLINE T ShuffleIndex(T input, int src_lane, unsigned int member_mask)
 {
-  using ShuffleWord = typename UnitWord<T>::ShuffleWord;
+  using ShuffleWord   = typename UnitWord<T>::ShuffleWord;
+  constexpr int WORDS = ::cuda::ceil_div(sizeof(T), sizeof(ShuffleWord));
 
-  constexpr int WORDS = (sizeof(T) + sizeof(ShuffleWord) - 1) / sizeof(ShuffleWord);
-
-  T output;
-  ShuffleWord* output_alias = reinterpret_cast<ShuffleWord*>(&output);
-  ShuffleWord* input_alias  = reinterpret_cast<ShuffleWord*>(&input);
+  ShuffleWord output_alias[WORDS];
+  ShuffleWord input_alias[WORDS];
+  ::cuda::std::memcpy(input_alias, &input, sizeof(T));
 
   unsigned int shuffle_word;
-  shuffle_word    = __shfl_sync(member_mask, (unsigned int) input_alias[0], src_lane, LOGICAL_WARP_THREADS);
-  output_alias[0] = shuffle_word;
-
   _CCCL_PRAGMA_UNROLL_FULL()
-  for (int WORD = 1; WORD < WORDS; ++WORD)
+  for (int WORD = 0; WORD < WORDS; ++WORD)
   {
     shuffle_word       = __shfl_sync(member_mask, (unsigned int) input_alias[WORD], src_lane, LOGICAL_WARP_THREADS);
     output_alias[WORD] = shuffle_word;
   }
+
+  T output;
+  ::cuda::std::memcpy(&output, output_alias, sizeof(T));
   return output;
 }
 
